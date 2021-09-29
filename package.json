@@ -1,0 +1,23 @@
+{
+  "name": "nodejs-practice",
+  "version": "1.0.0",
+  "description": "1. `npm init y`",
+  "main": "index.js",
+  "dependencies": {
+    "http-server": "^1.0.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Maryna-Skrypnyk/nodejs-practice.git"
+  },
+  "author": "Maryna Skrypnyk <marina.skrypnyk@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Maryna-Skrypnyk/nodejs-practice/issues"
+  },
+  "homepage": "https://github.com/Maryna-Skrypnyk/nodejs-practice#readme"
+}

@@ -1,8 +1,3 @@
-# nodejs-practice
-
-<code><a href="lesson02">Lesson02</a></code>
-<code><a href="lesson03">Lesson03</a></code>
-
 ## Progress with HTTP:
 
 (`cd lesson02/http-server`)
@@ -22,7 +17,7 @@
 "start:dev": "nodemon app.js"
 ```
 
-5. Import modules `http`, `fs`, `path` in `app.js`
+5. Import module `http`, `fs`, `path` in `app.js`
 
 6. Create TypeMime-object:
 
@@ -57,7 +52,7 @@ server.listen(PORT, (error) => {
 
 12. Go to `http://localhost:3000/`
 
-## Progress with Express 1:
+## Progress with Express:
 
 (`cd lesson02/express-server-0`)
 
@@ -171,7 +166,7 @@ app.post("/home", (req, res) => {
 
 14. Go to `http://localhost:8081/`
 
-## Progress with Express 2:
+## Progress with Express:
 
 (`cd lesson02/express-server`)
 
