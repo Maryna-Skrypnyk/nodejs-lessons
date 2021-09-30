@@ -1,5 +1,5 @@
-const express = require("express");
-const router = express.Router();
+const express = require('express');
+const router = new express.Router();
 const {
   getPosts,
   getPostById,
@@ -7,29 +7,29 @@ const {
   changePost,
   patchPost,
   deletePost,
-} = require("../controllers/postsController");
+} = require('../controllers/postsController');
 
 const {
   addPostValidation,
   patchPostValidation,
-} = require("../middlewares/validationMiddleware");
+} = require('../middlewares/validationMiddleware');
 
 // GET /api/posts -> [...posts]
-router.get("/", getPosts);
+router.get('/', getPosts);
 
 // GET /api/posts/<123> -> {post with id 123}
-router.get("/:id", getPostById);
+router.get('/:id', getPostById);
 
 // POST /api/posts -> [newPost, ...posts]
-router.post("/", addPostValidation, addPost);
+router.post('/', addPostValidation, addPost);
 
 // PUT /api/posts/123 -> [changePost, ...posts]
-router.put("/:id", addPostValidation, changePost);
+router.put('/:id', addPostValidation, changePost);
 
 // PATCH /api/posts/123 -> [changePost, ...posts]
-router.patch("/:id", patchPostValidation, patchPost);
+router.patch('/:id', patchPostValidation, patchPost);
 
 // DELETE /api/posts/123 -> [posts]
-router.delete("/:id", deletePost);
+router.delete('/:id', deletePost);
 
-module.exports = { postsRouter: router };
+module.exports = {postsRouter: router};
