@@ -1,6 +1,10 @@
 const express = require("express");
-const Joi = require("joi");
 const router = express.Router();
+
+const {
+  addPostValidation,
+  patchPostValidation,
+} = require("../middlewares/validationMiddleware");
 
 let posts = [
   { id: "1", topic: "test1", text: "text1" },
@@ -26,18 +30,7 @@ router.get("/:id", (req, res) => {
 });
 
 // POST /api/posts -> [newPost, ...posts]
-router.post("/", (req, res) => {
-  const schema = Joi.object({
-    topic: Joi.string().alphanum().min(3).max(30).required(),
-    text: Joi.string().alphanum().min(10).max(400).required(),
-  });
-  const validationResult = schema.validate(req.body);
-  if (validationResult.error) {
-    return res
-      .status(400)
-      .json({ status: validationResult.error.details[0].message });
-  }
-
+router.post("/", addPostValidation, (req, res) => {
   const { topic, text } = req.body;
   const newPost = {
     id: new Date().getTime().toString(),
@@ -49,18 +42,7 @@ router.post("/", (req, res) => {
 });
 
 // PUT /api/posts/123 -> [changePost, ...posts]
-router.put("/:id", (req, res) => {
-  const schema = Joi.object({
-    topic: Joi.string().alphanum().min(3).max(30).required(),
-    text: Joi.string().alphanum().min(10).max(400).required(),
-  });
-  const validationResult = schema.validate(req.body);
-  if (validationResult.error) {
-    return res
-      .status(400)
-      .json({ status: validationResult.error.details[0].message });
-  }
-
+router.put("/:id", addPostValidation, (req, res) => {
   const { topic, text } = req.body;
   posts.forEach((post) => {
     if (req.params.id === post.id) {
@@ -72,18 +54,7 @@ router.put("/:id", (req, res) => {
 });
 
 // PATCH /api/posts/123 -> [changePost, ...posts]
-router.patch("/:id", (req, res) => {
-  const schema = Joi.object({
-    topic: Joi.string().alphanum().min(3).max(30).optional(),
-    text: Joi.string().alphanum().min(10).max(400).optional(),
-  });
-  const validationResult = schema.validate(req.body);
-  if (validationResult.error) {
-    return res
-      .status(400)
-      .json({ status: validationResult.error.details[0].message });
-  }
-
+router.patch("/:id", patchPostValidation, (req, res) => {
   const { topic, text } = req.body;
   posts.forEach((post) => {
     if (post.id === req.params.id) {
