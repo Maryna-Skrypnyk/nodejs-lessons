@@ -51,18 +51,22 @@ const getCollections = () => {
 
 9. Add MONGO_URL in `.env`
 
-10. Create function `start` and add `app.listen` to `start`:
+10. Create function `start` and add `app.listen` to `start` with handle error:
 
 ```
 const start = async () => {
-  await connectMongo();
+  try {
+    await connectMongo();
 
-  app.listen(PORT, (err) => {
-    if (err) {
-      console.error("Error at server launch:", err);
-    }
-    console.log(`Server works at port ${PORT}`);
-  });
+    app.listen(PORT, (err) => {
+      if (err) {
+        console.error("Error at server launch:", err);
+      }
+      console.log(`Server works at port ${PORT}`);
+    });
+  } catch (err) {
+    console.error(`Failed to launch application with error: ${err.message}`);
+  }
 };
 
 start();
