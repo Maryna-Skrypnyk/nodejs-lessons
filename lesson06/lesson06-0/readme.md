@@ -132,11 +132,11 @@ module.exports = {
 8. Create errorHandler in `apiHelpers.js` and `server.js`
 
 9. Create file `errors.js` in `helpers`
-   create classes errors
+   create classes errors,
    import `ValidationError` to `validationMiddleware.js`
 
 10. import `ValidationError` to `validationMiddleware.js`, change error
 
 11. import `WrongParametersError` to `postService.js`, change errors
 
-12. Go to `apiHelpers.js`
+12. Go to `apiHelpers.js`, change function `errorHandler`
