@@ -1,50 +1,49 @@
-const ObjectId = require('mongodb').ObjectId;
+const {
+  getPosts,
+  getPostById,
+  addPost,
+  changePostById,
+  deletePostById,
+} = require('../services/postService');
 
-const getPosts = async (req, res) => {
-  const posts = await req.db.Posts.find({}).toArray();
+const getPostsController = async (req, res) => {
+  const posts = await getPosts();
   res.json({posts});
 };
 
-const getPostById = async (req, res) => {
+const getPostByIdController = async (req, res) => {
   const {id} = req.params;
-  const post = await req.db.Posts.findOne({_id: new ObjectId(id)});
-  if (!post) {
-    return res
-        .status(400)
-        .json({status: `failure, no post with id '${id}' found!`});
-  }
+  const post = await getPostById(id);
   res.json({post, status: 'success'});
 };
 
-const addPost = async (req, res) => {
+const addPostController = async (req, res) => {
   const {topic, text} = req.body;
-  const newPost = {
+  await addPost({
     topic,
     text,
-  };
-  await req.db.Posts.insert(newPost);
+  });
+
   res.json({status: 'success'});
 };
 
-const changePost = async (req, res) => {
+const changePostController = async (req, res) => {
+  const {id} = req.params;
   const {topic, text} = req.body;
-
-  await req.db.Posts.updateOne(
-      {_id: new ObjectId(req.params.id)},
-      {$set: {topic, text}},
-  );
+  await changePostById(id, {topic, text});
   res.json({status: 'success'});
 };
 
-const deletePost = async (req, res) => {
-  await req.db.Posts.deleteOne({_id: new ObjectId(req.params.id)});
+const deletePostController = async (req, res) => {
+  const {id} = req.params;
+  await deletePostById(id);
   res.json({status: 'success'});
 };
 
 module.exports = {
-  getPosts,
-  getPostById,
-  addPost,
-  changePost,
-  deletePost,
+  getPostsController,
+  getPostByIdController,
+  addPostController,
+  changePostController,
+  deletePostController,
 };

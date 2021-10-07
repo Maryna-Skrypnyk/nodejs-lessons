@@ -89,3 +89,54 @@ Update file `postController.js`, use methods db - find, findOne, insert, updateO
     Use `asyncWrapper` with controllers
 
 15. Use `Postman` to check app-requests
+
+## Progress with Mongoose:
+
+1. `npm i mongoose` (delete `mongodb` from package.json)
+
+2. Import mongoose to `connection.js`
+   `const mongoose = require('mongoose');`
+
+3. Connect Mongoose in `connection.js`:
+
+```
+const connectMongo = async () => {
+  return mongoose.connect(process.env.MONGO_URL, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  });
+  //   console.log("Database connected successfully!");
+};
+
+module.exports = {
+  connectMongo,
+};
+```
+
+4. Delete middleware `models.js`
+   Remove in `postsRouter.js`:
+
+   ```const modelsMiddleware = require("../middlewares/models");
+   router.use(modelsMiddleware);
+   ```
+
+5. Create schema in file `postModel.js` (db folder):
+
+6. Update `postsController.js`
+   use methods `find`, `findById`, `save`, `findByIdAndUpdate`, `findByIdAndRemove`
+
+7. Create folder `services` and file `postService.js`
+   Write functions `getPosts`, `getPostById`, `addPost`, `changePostById`, `deletePostById`
+   import this functions to `postController.js`
+
+8. Create errorHandler in `apiHelpers.js` and `server.js`
+
+9. Create file `errors.js` in `helpers`
+   create classes errors
+   import `ValidationError` to `validationMiddleware.js`
+
+10. import `ValidationError` to `validationMiddleware.js`, change error
+
+11. import `WrongParametersError` to `postService.js`, change errors
+
+12. Go to `apiHelpers.js`
