@@ -1,9 +1,14 @@
 const Joi = require("joi");
 Joi.objectId = require("joi-objectid")(Joi);
+const { ValidInfoCat } = require("../../config/constant");
 
 const schemaCat = Joi.object({
   name: Joi.string().alphanum().min(1).max(20).required(),
-  age: Joi.number().integer().min(1).max(30).required(),
+  age: Joi.number()
+    .integer()
+    .min(ValidInfoCat.MIN_AGE)
+    .max(ValidInfoCat.MAX_AGE)
+    .required(),
   isVaccinated: Joi.boolean().optional(),
 });
 

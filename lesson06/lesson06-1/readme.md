@@ -101,3 +101,102 @@ app.use((err, req, res, next) => {
     `Joi.objectId = require('joi-objectid')(Joi)`
 
 11. Update file `validation`
+
+## Progress with Mongoose (lesson06-1):
+
+(`cd lesson06/lesson06-1`)
+
+1. `npm i mongoose` (delete `mongodb` from package.json)
+
+2. Create folder `repository` in the root and move file `index.js` from `model` to `repository` (update import in controllers)
+
+3. Create file `cat.js` in `model`
+
+4. Create folder `config` in the root and move file `db.js` from `model` to `config`
+
+5. Do connect in the file `config/db.js`:
+   Import mongoose to `db.js`
+   `const mongoose = require('mongoose');`
+
+```
+const mongoose = require("mongoose");
+require("dotenv").config();
+
+const uri = process.env.URI_DB;
+
+const db = mongoose.connect(uri, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
+
+mongoose.connection.on("connected", () => {
+  console.log('Mongoose connection to DB');
+});
+
+mongoose.connection.on("error", (err) => {
+  console.log(`Mongoose connection error ${err.message}`);
+});
+
+// disconnected
+
+process.on("SIGINT", async () => {
+  await mongoose.connection.close();
+  console.log("Connection to DB closed.");
+  process.exit();
+});
+
+module.exports = db;
+```
+
+6. Update `bin/server.js`
+
+```
+const db = require("../config/db");
+const app = require("../app");
+
+const PORT = process.env.PORT || 8080;
+
+db.then(() => {
+  app.listen(PORT, () => {
+    console.log(`Server running. Use our API on port: ${PORT}`);
+  });
+}).catch((err) => {
+  console.log(`Server not run, Error: ${err.message}`);
+});
+```
+
+7. Write code in `model/cat.js` - schema mongoose
+
+8. Create `config/constant.js`, add constants:
+
+```
+const ValidInfoCat = {
+    MIN_AGE: 1,
+    MAX_AGE: 30
+};
+
+module.exports = {
+  ValidInfoCat,
+};
+```
+
+update `validation.js` and `model/cat.js` with constant
+
+9. Update `repository/index.js`
+
+10. Add objecr to schema `{ versionKey: false, timestamps: true, toJSON: { virtuals: true, transform: function (doc, ret) { delete ret._id; return ret; } }, toObject: { virtuals: true } }`
+
+11. Add `catSchema.virtual`:
+
+```
+catSchema.virtual("status").get(function () {
+  if (this.age >= 10) {
+    return "old";
+  }
+  return "young";
+});
+```
+
+12. Create folder `controller` and file `cats.js`
+
+13. Write controllers
