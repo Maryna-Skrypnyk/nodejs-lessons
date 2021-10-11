@@ -1,0 +1,27 @@
+[
+  {
+    "isVaccinated": false,
+    "name": "Foxy",
+    "age": 5
+  },
+  {
+    "isVaccinated": false,
+    "name": "Belka",
+    "age": 3
+  },
+  {
+    "isVaccinated": true,
+    "name": "Graph",
+    "age": 7
+  },
+  {
+    "isVaccinated": false,
+    "name": "Bird",
+    "age": 10
+  },
+  {
+    "isVaccinated": true,
+    "name": "Cattty",
+    "age": 10
+  }
+]
