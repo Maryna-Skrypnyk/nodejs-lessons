@@ -200,3 +200,9 @@ catSchema.virtual("status").get(function () {
 12. Create folder `controller` and file `cats.js`
 
 13. Write controllers
+
+## Progress (lesson07-1):
+
+(`cd lesson07/lesson07-1`)
+
+1.
