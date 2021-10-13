@@ -1,5 +1,5 @@
 const { Schema, model } = require("mongoose");
-const { ValidInfoCat } = require("../config/constant");
+const { ValidInfoCat } = require("../config/constants");
 
 const catSchema = new Schema(
   {

@@ -205,4 +205,70 @@ catSchema.virtual("status").get(function () {
 
 (`cd lesson07/lesson07-1`)
 
-1.
+1. Create folder `users` and files `users.js`, `validationUser.js` in `routes`
+
+2. Add `usersRouter` to `app.js`:
+
+```
+const usersRouter = require("./routes/users/users");
+...
+app.use("/api/users", usersRouter);
+app.use("/api/cats", catsRouter);
+...
+
+```
+
+3. Write routers in `routes/users/users.js`:
+   `router.post("/registration");`
+   `router.post("/login");`
+   `router.post("/logout");`
+
+4. Create file `users.js` in `controllers`
+
+5. Create `repository/users.js`
+
+6. Create `model/user.js`
+
+7. Do registration in `controllers/users.js`
+
+8. 'npm i bcryptjs' and work with password
+
+9. Create hook in `model/user.js`:
+
+```
+userSchema.pre("save", async function (next) {
+  if (this.isModified("password")) {
+    const salt = await bcryptjs.genSalt(SALT_FACTOR);
+    this.password = await bcryptjs.hash(this.password, salt);
+  }
+  next();
+});
+```
+
+10. Write Login
+
+11. Create function in `model/user.js`:
+
+```
+userSchema.methods.isValidPassword = async function (password) {
+  return bcrypt.compare(password, this.password);
+};
+```
+
+write controller `login`
+
+12. `npm i jsonwebtoken` and create token:
+    add in `.env` secret key
+    do imports in controller
+
+13. `npm install passport-jwt` and `npm install passport`
+
+14. Create `passport.js` in folder `config` and do setting
+
+15. Write function `findById` in `repository/user.js` and import it to `passport.js`
+
+16. Create `helpers/guard.js` in the root
+
+17. Import `guard` to `routes/cats/cats.js`
+
+18.

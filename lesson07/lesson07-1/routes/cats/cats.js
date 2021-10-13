@@ -13,20 +13,22 @@ const {
   updateCat,
   updateStatusVaccinatedCat,
 } = require("../../controllers/cats");
+const guard = require("../../helpers/guard");
 
-router.get("/", getCats);
+router.get("/", guard, getCats);
 
-router.get("/:id", validateId, getCat);
+router.get("/:id", guard, validateId, getCat);
 
-router.post("/", validateCat, saveCat);
+router.post("/", guard, validateCat, saveCat);
 
-router.delete("/:id", validateId, removeCat);
+router.delete("/:id", guard, validateId, removeCat);
 
-router.put("/:id", [validateId, validateCat], updateCat);
+router.put("/:id", guard, [(validateId, validateCat)], updateCat);
 
 router.patch(
   "/:id/vaccinated",
-  [validateId, validateStatusCat],
+  guard,
+  [(validateId, validateStatusCat)],
   updateStatusVaccinatedCat
 );
 

@@ -1,6 +1,6 @@
 const Joi = require("joi");
 Joi.objectId = require("joi-objectid")(Joi);
-const { ValidInfoCat } = require("../../config/constant");
+const { ValidInfoCat } = require("../../config/constants");
 
 const schemaCat = Joi.object({
   name: Joi.string().alphanum().min(1).max(20).required(),
