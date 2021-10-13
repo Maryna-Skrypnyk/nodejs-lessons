@@ -271,4 +271,15 @@ write controller `login`
 
 17. Import `guard` to `routes/cats/cats.js`
 
-18.
+18. Write function `logout`:
+    Import `guard` to `routes/users/users.js` and use it in logout:
+
+    ```
+    const guard = require("../../helpers/guard");
+        ...
+    router.post("/logout", guard, logout);
+    ```
+
+19. Write function `logout` in `controllers/users.js`
+
+20.
