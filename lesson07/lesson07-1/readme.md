@@ -231,7 +231,7 @@ app.use("/api/cats", catsRouter);
 
 7. Do registration in `controllers/users.js`
 
-8. 'npm i bcryptjs' and work with password
+8. `npm i bcryptjs` and work with password
 
 9. Create hook in `model/user.js`:
 
@@ -281,5 +281,3 @@ write controller `login`
     ```
 
 19. Write function `logout` in `controllers/users.js`
-
-20.
