@@ -14,16 +14,32 @@ const {
   updateStatusVaccinatedCat,
 } = require("../../controllers/cats");
 const guard = require("../../helpers/guard");
+const role = require("../../helpers/role");
+const wrapError = require("../../helpers/errorHandler");
+const { Gender } = require("../../config/constants");
 
-router.get("/", guard, getCats);
+router.get("/", guard, wrapError(getCats));
 
-router.get("/:id", guard, validateId, getCat);
+router.get(
+  "/test",
+  guard,
+  role(Gender.MALE),
+  wrapError((req, res, next) => {
+    res.json({
+      status: "success",
+      code: 200,
+      data: { message: "Only for man" },
+    });
+  })
+);
 
-router.post("/", guard, validateCat, saveCat);
+router.get("/:id", guard, validateId, wrapError(getCat));
 
-router.delete("/:id", guard, validateId, removeCat);
+router.post("/", guard, validateCat, wrapError(saveCat));
 
-router.put("/:id", guard, [(validateId, validateCat)], updateCat);
+router.delete("/:id", guard, validateId, wrapError(removeCat));
+
+router.put("/:id", guard, [(validateId, validateCat)], wrapError(updateCat));
 
 router.patch(
   "/:id/vaccinated",

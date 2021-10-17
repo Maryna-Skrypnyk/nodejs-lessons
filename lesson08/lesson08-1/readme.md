@@ -281,3 +281,96 @@ write controller `login`
     ```
 
 19. Write function `logout` in `controllers/users.js`
+
+## Progress (lesson08-1):
+
+(`cd lesson08/lesson08-1`)
+
+20. Connect cats with users in `model/cat.js`:
+    create owner property in schema
+
+21. Update `controllers/cats.js`
+
+22. Update `repository/index.js`
+
+23. `npm i mongoose-paginate-v2`
+
+24. Adds into `model/cat.js`:
+
+```
+const mongoosePaginate = require("mongoose-paginate-v2");
+...
+catSchema.plugin(mongoosePaginate);
+...
+```
+
+25. Update function `listCats` in `repository/index.js`
+    update function `getCats` in `controllers/cats.js`
+
+26. `npm i express-query-boolean`
+    Add in file `app.js`:
+
+```
+const boolParser = require("express-query-boolean");
+...
+app.use(express.json());
+app.use(boolParser());
+```
+
+27. `npm install --save helmet` - security
+    connect it into `app.js`
+
+    ```
+    const helmet = require("helmet");
+    ...
+    app.use(helmet())
+    ```
+
+28. `npm i express-rate-limit`
+    import it into `helpers/rate-limit-login.js`
+
+    ```
+        const rateLimit = require("express-rate-limit");
+
+        const limiter = rateLimit({
+        windowMs: 15 * 60 * 1000, // 15 minutes
+        max: 3, // limit each IP to 100 requests per windowMs
+
+    });
+    module.exports = {limiter};
+    ```
+
+29. Connect into `routes/users/users.js`
+
+30. Adds handler error in `helpers/rate-limit-login.js`:
+
+```
+handler: (req, res, next) => {
+    return res.status(HttpCode.TOO_MANY_REQUESTS).json({
+      status: "error",
+      code: HttpCode.TOO_MANY_REQUESTS,
+      message: "Too Many Requests",
+    });
+  },
+```
+
+31. Add limit into `app.js`: `app.use(express.json({ limit: 10000 }));`
+
+32. Create Error handlers:
+    create files: `helpers/customError.js` and `helpers/errorHandler.js`
+    write class `CustomError` in `customError.js` and function `wrapper` in `errorHandler.js`
+    import `wrapper` into `routes/cats/cats.js` (errorHandler)
+    import `CustomError`into`controllers/cats.js`
+
+33. Create `helpers/role.js`
+    Add test-router in `routes/cats/cats.js`
+
+34. Create folder `messages` and file `role-message.js`
+    Add in `app.js`:
+
+```
+app.use((req, _res, next) => {
+  app.set("lang", req.acceptsLanguages(["ru", "en"]));
+  next();
+});
+```

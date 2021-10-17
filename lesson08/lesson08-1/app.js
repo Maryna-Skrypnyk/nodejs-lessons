@@ -19,6 +19,11 @@ app.use(cors());
 app.use(express.json({ limit: Limit.JSON }));
 app.use(boolParser());
 
+app.use((req, _res, next) => {
+  app.set("lang", req.acceptsLanguages(["ru", "en"]));
+  next();
+});
+
 app.use("/api/users", usersRouter);
 app.use("/api/cats", catsRouter);
 
@@ -27,11 +32,6 @@ app.use((req, res) => {
 });
 
 app.use((err, req, res, next) => {
-  if (err.name === "ValidationError") {
-    return res
-      .status(400)
-      .json({ status: "error", code: 400, message: err.message });
-  }
   res.status(500).json({ status: "fail", code: 500, message: err.message });
 });
 

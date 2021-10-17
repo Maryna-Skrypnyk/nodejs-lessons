@@ -26,7 +26,7 @@ const HttpCode = {
 const Limit = {
   JSON: 10000,
   WINDOW_MS: 15 * 60 * 1000,
-  MAX_LIMITER: 3,
+  MAX_LIMITER: 5,
 };
 
 module.exports = {
