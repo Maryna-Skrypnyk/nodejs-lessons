@@ -274,11 +274,11 @@ write controller `login`
 18. Write function `logout`:
     Import `guard` to `routes/users/users.js` and use it in logout:
 
-    ```
-    const guard = require("../../helpers/guard");
-        ...
-    router.post("/logout", guard, logout);
-    ```
+```
+  const guard = require("../../helpers/guard");
+      ...
+  router.post("/logout", guard, logout);
+```
 
 19. Write function `logout` in `controllers/users.js`
 
@@ -320,25 +320,25 @@ app.use(boolParser());
 27. `npm install --save helmet` - security
     connect it into `app.js`
 
-    ```
-    const helmet = require("helmet");
+```
+  const helmet = require("helmet");
     ...
-    app.use(helmet())
-    ```
+  app.use(helmet())
+```
 
 28. `npm i express-rate-limit`
     import it into `helpers/rate-limit-login.js`
 
-    ```
-        const rateLimit = require("express-rate-limit");
+```
+  const rateLimit = require("express-rate-limit");
 
-        const limiter = rateLimit({
-        windowMs: 15 * 60 * 1000, // 15 minutes
-        max: 3, // limit each IP to 100 requests per windowMs
+  const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 3, // limit each IP to 100 requests per windowMs
 
     });
-    module.exports = {limiter};
-    ```
+  module.exports = {limiter};
+```
 
 29. Connect into `routes/users/users.js`
 
