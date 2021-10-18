@@ -39,10 +39,10 @@
 3. Comment rules properties:
 
 ```
-   rules: {
-    // "comma-dangle": "off",
-    // "space-before-function-paren": "off",
-  },
+rules: {
+  // "comma-dangle": "off",
+  // "space-before-function-paren": "off",
+},
 ```
 
 4. `npm run start:dev`
@@ -215,7 +215,6 @@ const usersRouter = require("./routes/users/users");
 app.use("/api/users", usersRouter);
 app.use("/api/cats", catsRouter);
 ...
-
 ```
 
 3. Write routers in `routes/users/users.js`:
@@ -275,9 +274,9 @@ write controller `login`
     Import `guard` to `routes/users/users.js` and use it in logout:
 
 ```
-  const guard = require("../../helpers/guard");
-      ...
-  router.post("/logout", guard, logout);
+const guard = require("../../helpers/guard");
+  ...
+router.post("/logout", guard, logout);
 ```
 
 19. Write function `logout` in `controllers/users.js`
@@ -299,9 +298,9 @@ write controller `login`
 
 ```
 const mongoosePaginate = require("mongoose-paginate-v2");
-...
+  ...
 catSchema.plugin(mongoosePaginate);
-...
+  ...
 ```
 
 25. Update function `listCats` in `repository/index.js`
@@ -312,7 +311,7 @@ catSchema.plugin(mongoosePaginate);
 
 ```
 const boolParser = require("express-query-boolean");
-...
+  ...
 app.use(express.json());
 app.use(boolParser());
 ```
@@ -321,23 +320,23 @@ app.use(boolParser());
     connect it into `app.js`
 
 ```
-  const helmet = require("helmet");
-    ...
-  app.use(helmet())
+const helmet = require("helmet");
+  ...
+app.use(helmet())
 ```
 
 28. `npm i express-rate-limit`
     import it into `helpers/rate-limit-login.js`
 
 ```
-  const rateLimit = require("express-rate-limit");
+const rateLimit = require("express-rate-limit");
 
-  const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 3, // limit each IP to 100 requests per windowMs
+const limiter = rateLimit({
+windowMs: 15 * 60 * 1000, // 15 minutes
+max: 3, // limit each IP to 100 requests per windowMs
+});
 
-    });
-  module.exports = {limiter};
+module.exports = {limiter};
 ```
 
 29. Connect into `routes/users/users.js`
