@@ -466,4 +466,20 @@ app.use(express.static(AVATAR_OF_USERS));
   ...
 ```
 
-19.
+19. `npm install cloudinary`
+20. Create `service/cloud-upload.js`
+    import:
+
+```
+const cloudinary = require("cloudinary").v2;
+```
+
+Add `cloudinary.config` and other code
+
+21. Update `controllers/users.js`
+
+22. Update schema in `model/user.js`
+
+23. Update `repository/users.js`
+
+24. Testing in Postman, MongoDB, Cloudinary
