@@ -378,4 +378,92 @@ app.use((req, _res, next) => {
 
 (`cd lesson09/lesson09-1`)
 
-1.
+1. `npm install --save multer`
+
+2. `npm i gravatar`
+
+3. Add property `avatar` into `model/user.js`:
+
+```
+  ...
+const gravatar = require("gravatar");
+  ...
+...avatar: {
+      type: String,
+      default: function () {
+        return gravatar.url(this.email, { s: "250" }, true);
+      },
+    },
+  ...
+```
+
+4. Add `avatar` into `regisration` `controllers/users.js`
+
+5. Create file `uploads.js` in `helpers`
+
+6. `npm i mkdirp`
+
+7. Add into env ...
+
+8. Import `multer` into `helpers/uploads.js` and write code
+
+9. Update `bin/server.js`:
+
+```
+  ...
+const mkdirp = require("mkdirp");
+require("dotenv").config();
+const UPLOAD_DIR = process.env.UPLOAD_DIR;
+const AVATAR_OF_USERS = process.env.AVATAR_OF_USERS;
+  ...
+app.listen(PORT, async () => {
+    await mkdirp(UPLOAD_DIR);
+    await mkdirp(AVATAR_OF_USERS);
+    console.log(`Server running. Use our API on port: ${PORT}`);
+  });
+  ...
+```
+
+10. Update `app.js`:
+
+```
+  ...
+app.use((err, req, res, next) => {
+  const statusCode = err.status || 500;
+  res.status(statusCode).json({
+    status: statusCode === 500 ? "fail" : "error",
+    code: statusCode,
+    message: err.message,
+  });
+});
+  ...
+```
+
+11. Update `routes/users.js` - import `helpers/uploads.js`, write router (/avatar)
+
+12. Update `controllers/users.js`
+
+13. Create `services/file-upload.js`
+
+14. `npm i jimp`
+    import Jimp into `services/file-upload.js`
+
+15. Import `UploadService` into `controllers/users.js`
+    Update `uploadAvatar` in `controllers/users.js`
+
+16. Update `repository/users.js`
+
+17. Write class in `services/file-upload.js`
+
+18. Update `app.js`:
+
+```
+  ...
+require("dotenv").config();
+const AVATAR_OF_USERS = process.env.AVATAR_OF_USERS;
+  ...
+app.use(express.static(AVATAR_OF_USERS));
+  ...
+```
+
+19.
