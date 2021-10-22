@@ -483,3 +483,64 @@ Add `cloudinary.config` and other code
 23. Update `repository/users.js`
 
 24. Testing in Postman, MongoDB, Cloudinary
+
+## Progress (lesson10-1) testing:
+
+(`cd lesson10/lesson10-1`)
+
+1. `npm install --save-dev jest`
+
+2. Create file in the root `jest.config.js`
+   Add config:
+
+```module.exports = {
+  testEnvironment: "node",
+};
+```
+
+3. Create folder `test`
+
+4. Add to `.eslintrc.js` -> `"jest/globals": true,`
+
+5. Add command `test` to `package.json`:
+   `"test": "cross-env NODE_ENV=test jest --no-cache --verbose", "test:coverage": "cross-env NODE_ENV=test jest --coverage"`
+
+   (`npm test`)
+
+6. Testing `cats-controller.test.js` -> updateCat
+
+7. Testing `guard.test.js` -> guard
+
+8. Integration testing: `cats.e2e.spec.js`
+   `npm install supertest --save-dev`
+
+9. Create URI_DB_TEST in the .env
+
+10. Update `config/db.js`:
+
+```
+let uri;
+
+if (process.env.NODE_ENV == 'test') {
+  uri = process.env.URI_DB_TEST;
+} else {
+  uri = process.env.URI_DB;
+}
+  ...
+if (process.env.NODE_ENV == 'test') {
+  mongoose.connection.on("connected", () => {
+    console.log("Mongoose connection to DB");
+  });
+
+  mongoose.connection.on("error", (err) => {
+    console.log(`Mongoose connection error ${err.message}`);
+  });
+}
+```
+
+11. Write code `cats.e2e.spec.js`
+
+12. Create `test/data/data.js` and write data
+    Import `data` into `cats.e2e.spec.js`
+
+13.
