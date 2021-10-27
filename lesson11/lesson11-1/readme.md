@@ -554,3 +554,49 @@ if (process.env.NODE_ENV == 'test') {
     write code
 
 16. Update `app.js`: `app.get('env') !== 'test' && app.use(logger(formatsLogger));`
+
+## Progress (lesson11-1) sending email:
+
+(`cd lesson11/lesson11-1`)
+
+1. Create folder `email` in the folder `services`
+   create files `email/service.js` and `email/sender.js`
+
+2. Add code in `model/user.js`:
+
+```
+...
+const crypto = require('crypto');
+...
+{
+isVerified: { type: Boolean, default: false },
+verifyToken: {type: String, required: true, default: crypto.randomUUID()},
+}
+...
+```
+
+3. Add in `controllers/users.js` in `login` - ` if (!user || !isValidPassword || !user?.isVerified) {...`
+
+4. Add functions `verifyUser`and`repeatEmailForVerifyUser` in `controllers/users.js`
+
+5. Add routers in `routes/users/users.js`
+
+6. `npm i mailgen`
+
+7. `npm i @sendgrid/mail`
+
+8. `npm i nodemailer` - ?
+
+9. Write code in `services/email/service.js`
+
+10. Write code in `services/email/sender.js`
+
+11. Create SENDGRID_API_KEY and PASSWORD
+
+12. Add `updateTokenVerify` in `repository/users.js`
+
+13. Write code in `controllers/users.js`
+
+14. Create function in `repository/users.js` - `findUserByVerifyToken`
+
+15.
