@@ -16,14 +16,14 @@ class CreateSenderNodemailer {
       port: 465,
       secure: true,
       auth: {
-        user: "goitnodejs@meta.ua",
+        user: "maryna.skrypnyk@meta.ua",
         pass: process.env.PASSWORD,
       },
     };
     const transporter = nodemailer.createTransport(config);
     return await transporter.sendMail({
       ...msg,
-      from: "goitnodejs@meta.ua",
+      from: "maryna.skrypnyk@meta.ua",
     });
   }
 }
