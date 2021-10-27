@@ -595,8 +595,8 @@ verifyToken: {type: String, required: true, default: crypto.randomUUID()},
 
 12. Add `updateTokenVerify` in `repository/users.js`
 
-13. Write code in `controllers/users.js`
+13. Write code in `controllers/users.js` (registration, login)
 
 14. Create function in `repository/users.js` - `findUserByVerifyToken`
 
-15.
+15. Adds functions `verifyUser` and `repeatEmailForVerifyUser` in `controllers/users.js`
